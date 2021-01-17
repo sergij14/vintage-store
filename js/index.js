@@ -1,6 +1,10 @@
 import "regenerator-runtime/runtime";
 import "core-js/stable";
 
+if (module.hot) {
+  module.hot.accept();
+}
+
 //
 
 // Author: Sergi. J

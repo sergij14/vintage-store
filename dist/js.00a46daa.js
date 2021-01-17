@@ -12279,10 +12279,14 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-//
+if (module.hot) {
+  module.hot.accept();
+} //
 // Author: Sergi. J
 // Date: Jan, 2020
 //
+
+
 "use strict";
 
 var client = contentful.createClient({
@@ -12697,7 +12701,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53446" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50669" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

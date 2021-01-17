@@ -250,13 +250,12 @@ Nav
   top: 8rem;
   overflow: auto;
   transition: $transition;
-  opacity: 0;
-  visibility: hidden;
+  border-bottom-left-radius: 0.7rem;
   transform: scale(0, 1);
   background: $tertiary-darker;
+  opacity: 0;
   width: 25vw;
-  height: 100vh;
-  padding-bottom: 8rem;
+  height: 80vh;
 }
 
 .nav__cart-count {
@@ -273,10 +272,8 @@ Nav
 }
 
 .nav__cart--show {
-  height: 100vh;
-  transform: scale(1, 1);
   opacity: 1;
-  visibility: visible;
+  transform: scale(1, 1);
 }
 
 .nav__cart__item {
@@ -522,12 +519,8 @@ Utilities
   padding-top: 2em;
 }
 
-.pad-t-4 {
-  padding-top: 4em;
-}
-
 .pad-t-6 {
-  padding-top: 6em;
+  padding-top: 12em;
 }
 
 .mar-tb-05 {
@@ -617,5 +610,6 @@ Media Queries
 @media screen and (max-width: 520px) {
   .nav__cart {
     width: 100%;
+    border-bottom-left-radius: 0;
   }
 }
