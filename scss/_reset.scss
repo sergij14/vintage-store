@@ -58,7 +58,9 @@ a:hover {
 a:focus,
 a:active,
 button:focus,
-button:active {
+button:active,
+i:focus,
+i:active {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
   outline: none !important;

@@ -12319,6 +12319,19 @@ var navShow = function navShow() {
   }
 };
 
+var disableScrolling = function disableScrolling() {
+  var x = window.scrollX;
+  var y = window.scrollY;
+
+  window.onscroll = function () {
+    window.scrollTo(x, y);
+  };
+};
+
+var enableScrolling = function enableScrolling() {
+  window.onscroll = function () {};
+};
+
 var outSideClick = function outSideClick(event) {
   if (nav.classList.contains("nav__menu--show") && !hamBtn.contains(event.target) && !event.target.closest(".nav__menu")) {
     navShow();
@@ -12329,6 +12342,7 @@ var cartShow = function cartShow() {
   cart.classList.toggle("nav__cart--show");
   cartBtn.firstElementChild.classList.toggle("fa-times");
   overlay.classList.toggle("overlay--show");
+  cart.classList.contains("nav__cart--show") ? disableScrolling() : enableScrolling();
 };
 
 hamBtn.addEventListener("click", navShow);
@@ -12705,7 +12719,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51750" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52764" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

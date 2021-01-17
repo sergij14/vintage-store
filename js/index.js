@@ -53,6 +53,18 @@ const navShow = function () {
   }
 };
 
+const disableScrolling = function () {
+  const x = window.scrollX;
+  const y = window.scrollY;
+  window.onscroll = function () {
+    window.scrollTo(x, y);
+  };
+};
+
+const enableScrolling = function () {
+  window.onscroll = function () {};
+};
+
 const outSideClick = function (event) {
   if (
     nav.classList.contains("nav__menu--show") &&
@@ -67,6 +79,9 @@ const cartShow = function () {
   cart.classList.toggle("nav__cart--show");
   cartBtn.firstElementChild.classList.toggle("fa-times");
   overlay.classList.toggle("overlay--show");
+  cart.classList.contains("nav__cart--show")
+    ? disableScrolling()
+    : enableScrolling();
 };
 
 hamBtn.addEventListener("click", navShow);
