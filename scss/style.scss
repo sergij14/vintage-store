@@ -610,6 +610,6 @@ Media Queries
 @media screen and (max-width: 520px) {
   .nav__cart {
     width: 100%;
-    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0.7rem;
   }
 }
