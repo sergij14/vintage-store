@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "sys": { "id": "1" },
+      "fields": {
+        "title": "1970s Handmade Studio Pottery Art Vase",
+        "price": 225,
+        "image": { "fields": { "file": { "url": "./img/img-01.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "2" },
+      "fields": {
+        "title": "Mid Century Matte White Porcelain Vase",
+        "price": 165,
+        "image": { "fields": { "file": { "url": "./img/img-02.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "3" },
+      "fields": {
+        "title": "Mid Century White Porcelain Botanical Vase",
+        "price": 145,
+        "image": { "fields": { "file": { "url": "./img/img-03.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "4" },
+      "fields": {
+        "title": "Mid Century Modern Cream and Brown Studio Pottery Vase",
+        "price": 825,
+        "image": { "fields": { "file": { "url": "./img/img-04.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "5" },
+      "fields": {
+        "title": "Mid Century West German Studio Pottery Vase",
+        "price": 125,
+        "image": { "fields": { "file": { "url": "./img/img-05.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "6" },
+      "fields": {
+        "title": "Mid Century Textured Travertine Studio Pottery Vase",
+        "price": 275,
+        "image": { "fields": { "file": { "url": "./img/img-06.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "7" },
+      "fields": {
+        "title": "Mid Century Matte White Porcelain Vase",
+        "price": 215,
+        "image": { "fields": { "file": { "url": "./img/img-07.jpg" } } }
+      }
+    },
+    {
+      "sys": { "id": "8" },
+      "fields": {
+        "title": "Bjorn Wiinblad Covered Gold Porcelain Bowl",
+        "price": 245,
+        "image": { "fields": { "file": { "url": "./img/img-08.jpg" } } }
+      }
+    }
+  ]
+}
