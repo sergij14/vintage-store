@@ -494,8 +494,10 @@ Nav
   right: 0;
   top: 8rem;
   overflow: auto;
-  -webkit-transition: all 250ms ease-in-out;
-  transition: all 250ms ease-in-out;
+  -webkit-transition: all 230ms ease;
+  transition: all 230ms ease;
+  opacity: 0;
+  visibility: hidden;
   -webkit-transform: scale(0, 1);
           transform: scale(0, 1);
   background: #b8aaa0;
@@ -521,6 +523,8 @@ Nav
   height: 100vh;
   -webkit-transform: scale(1, 1);
           transform: scale(1, 1);
+  opacity: 1;
+  visibility: visible;
 }
 
 .nav__cart__item {

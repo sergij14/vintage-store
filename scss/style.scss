@@ -249,7 +249,9 @@ Nav
   right: 0;
   top: 8rem;
   overflow: auto;
-  transition: all 250ms ease-in-out;
+  transition: $transition;
+  opacity: 0;
+  visibility: hidden;
   transform: scale(0, 1);
   background: $tertiary-darker;
   width: 25vw;
@@ -273,6 +275,8 @@ Nav
 .nav__cart--show {
   height: 100vh;
   transform: scale(1, 1);
+  opacity: 1;
+  visibility: visible;
 }
 
 .nav__cart__item {
