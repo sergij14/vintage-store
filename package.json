@@ -1,0 +1,27 @@
+{
+  "name": "vintage-store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergij14/vintage-store.git"
+  },
+  "author": "sergij14",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sergij14/vintage-store/issues"
+  },
+  "homepage": "https://github.com/sergij14/vintage-store#readme",
+  "devDependencies": {
+    "parcel": "^1.12.4"
+  },
+  "dependencies": {
+    "core-js": "^3.8.2",
+    "regenerator-runtime": "^0.13.7"
+  }
+}

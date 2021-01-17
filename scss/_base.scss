@@ -1,0 +1,26 @@
+/*
+==============================
+==============================
+*/
+$primary: #3b3b3b;
+$primary-darker: #303030;
+$secondary: #af6b58;
+$secondary-lighter: #c27864;
+$tertiary: #cbbcb1;
+$tertiary-darker: #b8aaa0;
+$quaternary: #f2efea;
+$quaternary-darker: #cccccc;
+
+$gradient-primary: linear-gradient(120deg, #af6b58, #bd715d);
+$gradient-secondary: linear-gradient(100deg, #af614b, #cf7d66);
+$gradient-white: linear-gradient(120deg, #dfdfdf, #f7f7f7);
+$gradient-white-secondary: linear-gradient(120deg, #f7f7f7, #d3d3d3);
+
+$white-transparent: rgba(255, 255, 255, 0.3);
+$white: #ffffff;
+$white-darker: #858585;
+
+$black: rgba(0, 0, 0, 0.6);
+$black-darker: rgba(0, 0, 0, 0.8);
+
+$transition: all 230ms ease;
