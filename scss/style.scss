@@ -569,14 +569,14 @@ Media Queries
   }
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 650px) {
   .store__item {
     flex: 1 1 33.33333333333333%;
     max-width: 33.33333333333333%;
   }
 }
 
-@media screen and (min-width: 820px) {
+@media screen and (min-width: 1010px) {
   .store__item {
     flex: 1 1 25%;
     max-width: 25%;

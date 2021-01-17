@@ -48,6 +48,9 @@ let buttons = [];
 const navShow = function () {
   nav.classList.toggle("nav__menu--show");
   hamBtn.firstElementChild.classList.toggle("fa-times");
+  if (cart.classList.contains("nav__cart--show")) {
+    cartShow();
+  }
 };
 
 const outSideClick = function (event) {
