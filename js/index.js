@@ -135,21 +135,7 @@ class Products {
 class UI {
   displayProducts(products) {
     products.forEach((product) => {
-      store.insertAdjacentHTML(
-        "beforeend",
-        `
-      <article class="store__item">
-      <div class="store__item__img-container">
-          <img class="store__item__img" src="${product.image}" />
-          <button class="store__item__btn" data-id="${product.id}">Add to Cart</button>
-      </div>
-      <div class="store__item__info">
-      <span class="store__item__title mar-tb-05">${product.title}</span>
-      <span class="store__item__price">$ ${product.price}</span>
-      </div>
-  </article>
-      `
-      );
+      UIfunctions.renderStoreItems(product);
     });
   }
   getBagButtons() {
@@ -167,72 +153,20 @@ class UI {
       btn.addEventListener("click", function (event) {
         event.target.textContent = "In Cart";
         event.target.disabled = true;
-
         let cartItem = { ...Storage.getProduct(id), amount: 1 };
         cartList = [...cartList, cartItem];
-
         Storage.saveCart(cartList);
-
-        let TempTotal = 0;
-        let itemsTotal = 0;
-        cartList.map((item) => {
-          TempTotal += item.price * item.amount;
-          itemsTotal += item.amount;
-        });
-        cartTotal.textContent = parseFloat(TempTotal.toFixed(2));
-        bagCartItems.textContent = itemsTotal;
-
-        cart.insertAdjacentHTML(
-          "afterbegin",
-          `
-<div class="nav__cart__item">
-<img class="nav__cart__item__img" src="${cartItem.image}" />
-<div class="nav__cart__item__info">
-    <span class="nav__cart__item__title mar-tb-05">${cartItem.title}</span>
-    <span class="nav__cart__item__price">$ ${cartItem.price}</span>
-    <button class="nav__cart__item__remove-btn mar-tb-05" data-id="${cartItem.id}">Remove</button>
-</div>
-<div class="nav__cart__item__quantity">
-    <i class="fas fa-chevron-up" data-id="${cartItem.id}"></i>
-    <span class="nav__cart__item__quantity-counter">${cartItem.amount}</span>
-    <i class="fas fa-chevron-down" data-id="${cartItem.id}"></i>
-</div>
-</div>
-`
-        );
+        UIfunctions.setCartValues(cartList);
+        UIfunctions.renderCartItems(cartItem);
         cartShow();
       });
     });
   }
   setupAPP() {
     cartList = Storage.getCart();
-    let TempTotal = 0;
-    let itemsTotal = 0;
-    cartList.map((item) => {
-      TempTotal += item.price * item.amount;
-      itemsTotal += item.amount;
-    });
-    cartTotal.textContent = parseFloat(TempTotal.toFixed(2));
-    bagCartItems.textContent = itemsTotal;
+    UIfunctions.setCartValues(cartList);
     cartList.forEach((item) => {
-      cart.insertAdjacentHTML(
-        "afterbegin",
-        `
-<div class="nav__cart__item">
-<img class="nav__cart__item__img" src="${item.image}" />
-<div class="nav__cart__item__info">
-  <span class="nav__cart__item__title mar-tb-05">${item.title}</span>
-  <span class="nav__cart__item__price">$ ${item.price}</span>
-  <button class="nav__cart__item__remove-btn mar-tb-05" data-id="${item.id}">Remove</button>
-</div>
-<div class="nav__cart__item__quantity">
-  <i class="fas fa-chevron-up" data-id="${item.id}"></i>
-  <span class="nav__cart__item__quantity-counter">${item.amount}</span>
-  <i class="fas fa-chevron-down" data-id="${item.id}"></i>
-</div>
-</div>
-`
-      );
+      UIfunctions.renderCartItems(item);
     });
   }
   cartLogic() {
@@ -243,16 +177,9 @@ class UI {
         let removeItem = event.target;
         let id = removeItem.dataset.id;
         cartList = cartList.filter((item) => item.id !== id);
-        let TempTotal = 0;
-        let itemsTotal = 0;
-        cartList.map((item) => {
-          TempTotal += item.price * item.amount;
-          itemsTotal += item.amount;
-        });
-        cartTotal.textContent = parseFloat(TempTotal.toFixed(2));
-        bagCartItems.textContent = itemsTotal;
+        UIfunctions.setCartValues(cartList);
         Storage.saveCart(cartList);
-        let button = buttons.find((btn) => btn.dataset.id === id);
+        let button = UIfunctions.getSingleButton(id);
         button.disabled = false;
         button.textContent = "Add to Cart";
         cart.removeChild(removeItem.parentElement.parentElement);
@@ -262,14 +189,7 @@ class UI {
         let tempItem = cartList.find((item) => item.id === id);
         tempItem.amount += 1;
         Storage.saveCart(cartList);
-        let TempTotal = 0;
-        let itemsTotal = 0;
-        cartList.map((item) => {
-          TempTotal += item.price * item.amount;
-          itemsTotal += item.amount;
-        });
-        cartTotal.textContent = parseFloat(TempTotal.toFixed(2));
-        bagCartItems.textContent = itemsTotal;
+        UIfunctions.setCartValues(cartList);
         addAmount.nextElementSibling.textContent = tempItem.amount;
       } else if (event.target.classList.contains("fa-chevron-down")) {
         let lowerAmount = event.target;
@@ -278,27 +198,15 @@ class UI {
         tempItem.amount -= 1;
         if (tempItem.amount > 0) {
           Storage.saveCart(cartList);
-          let TempTotal = 0;
-          let itemsTotal = 0;
-          cartList.map((item) => {
-            TempTotal += item.price * item.amount;
-            itemsTotal += item.amount;
-          });
-          cartTotal.textContent = parseFloat(TempTotal.toFixed(2));
-          bagCartItems.textContent = itemsTotal;
+          UIfunctions.setCartValues(cartList);
           lowerAmount.previousElementSibling.textContent = tempItem.amount;
         } else {
           cart.removeChild(lowerAmount.parentElement.parentElement);
           cartList = cartList.filter((item) => item.id !== id);
-          let TempTotal = 0;
-          let itemsTotal = 0;
-          cartList.map((item) => {
-            TempTotal += item.price * item.amount;
-            itemsTotal += item.amount;
-          });
-          cartTotal.textContent = parseFloat(TempTotal.toFixed(2));
-          bagCartItems.textContent = itemsTotal;
-          let button = buttons.find((btn) => btn.dataset.id === id);
+
+          UIfunctions.setCartValues(cartList);
+
+          let button = UIfunctions.getSingleButton(id);
           button.disabled = false;
           button.textContent = "Add to Cart";
         }
@@ -315,6 +223,20 @@ class UI {
   }
   removeItem(id) {
     cartList = cartList.filter((item) => item.id !== id);
+    UIfunctions.setCartValues(cartList);
+    Storage.saveCart(cartList);
+    let button = UIfunctions.getSingleButton(id);
+    button.disabled = false;
+    button.textContent = "Add to Cart";
+  }
+}
+
+////////////////////////////////////////////////////////
+// UI Functions
+////////////////////////////////////////////////////////
+
+class UIfunctions {
+  static setCartValues(cartList) {
     let TempTotal = 0;
     let itemsTotal = 0;
     cartList.map((item) => {
@@ -323,13 +245,50 @@ class UI {
     });
     cartTotal.textContent = parseFloat(TempTotal.toFixed(2));
     bagCartItems.textContent = itemsTotal;
-    Storage.saveCart(cartList);
-    let button = this.getSingleButton(id);
-    button.disabled = false;
-    button.textContent = "Add to Cart";
+    console.log("sdgsdhgs");
   }
-  getSingleButton(id) {
+
+  static getSingleButton(id) {
     return buttons.find((btn) => btn.dataset.id === id);
+  }
+
+  static renderCartItems(cartItem) {
+    cart.insertAdjacentHTML(
+      "afterbegin",
+      `
+<div class="nav__cart__item">
+<img class="nav__cart__item__img" src="${cartItem.image}" />
+<div class="nav__cart__item__info">
+<span class="nav__cart__item__title mar-tb-05">${cartItem.title}</span>
+<span class="nav__cart__item__price">$ ${cartItem.price}</span>
+<button class="nav__cart__item__remove-btn mar-tb-05" data-id="${cartItem.id}">Remove</button>
+</div>
+<div class="nav__cart__item__quantity">
+<i class="fas fa-chevron-up" data-id="${cartItem.id}"></i>
+<span class="nav__cart__item__quantity-counter">${cartItem.amount}</span>
+<i class="fas fa-chevron-down" data-id="${cartItem.id}"></i>
+</div>
+</div>
+`
+    );
+  }
+
+  static renderStoreItems(product) {
+    store.insertAdjacentHTML(
+      "beforeend",
+      `
+      <article class="store__item">
+      <div class="store__item__img-container">
+          <img class="store__item__img" src="${product.image}" />
+          <button class="store__item__btn" data-id="${product.id}">Add to Cart</button>
+      </div>
+      <div class="store__item__info">
+      <span class="store__item__title mar-tb-05">${product.title}</span>
+      <span class="store__item__price">$ ${product.price}</span>
+      </div>
+  </article>
+      `
+    );
   }
 }
 

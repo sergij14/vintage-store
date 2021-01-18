@@ -12441,7 +12441,7 @@ var UI = /*#__PURE__*/function () {
     key: "displayProducts",
     value: function displayProducts(products) {
       products.forEach(function (product) {
-        store.insertAdjacentHTML("beforeend", "\n      <article class=\"store__item\">\n      <div class=\"store__item__img-container\">\n          <img class=\"store__item__img\" src=\"".concat(product.image, "\" />\n          <button class=\"store__item__btn\" data-id=\"").concat(product.id, "\">Add to Cart</button>\n      </div>\n      <div class=\"store__item__info\">\n      <span class=\"store__item__title mar-tb-05\">").concat(product.title, "</span>\n      <span class=\"store__item__price\">$ ").concat(product.price, "</span>\n      </div>\n  </article>\n      "));
+        UIfunctions.renderStoreItems(product);
       });
     }
   }, {
@@ -12471,15 +12471,8 @@ var UI = /*#__PURE__*/function () {
 
           cartList = [].concat(_toConsumableArray(cartList), [cartItem]);
           Storage.saveCart(cartList);
-          var TempTotal = 0;
-          var itemsTotal = 0;
-          cartList.map(function (item) {
-            TempTotal += item.price * item.amount;
-            itemsTotal += item.amount;
-          });
-          cartTotal.textContent = parseFloat(TempTotal.toFixed(2));
-          bagCartItems.textContent = itemsTotal;
-          cart.insertAdjacentHTML("afterbegin", "\n<div class=\"nav__cart__item\">\n<img class=\"nav__cart__item__img\" src=\"".concat(cartItem.image, "\" />\n<div class=\"nav__cart__item__info\">\n    <span class=\"nav__cart__item__title mar-tb-05\">").concat(cartItem.title, "</span>\n    <span class=\"nav__cart__item__price\">$ ").concat(cartItem.price, "</span>\n    <button class=\"nav__cart__item__remove-btn mar-tb-05\" data-id=\"").concat(cartItem.id, "\">Remove</button>\n</div>\n<div class=\"nav__cart__item__quantity\">\n    <i class=\"fas fa-chevron-up\" data-id=\"").concat(cartItem.id, "\"></i>\n    <span class=\"nav__cart__item__quantity-counter\">").concat(cartItem.amount, "</span>\n    <i class=\"fas fa-chevron-down\" data-id=\"").concat(cartItem.id, "\"></i>\n</div>\n</div>\n"));
+          UIfunctions.setCartValues(cartList);
+          UIfunctions.renderCartItems(cartItem);
           cartShow();
         });
       });
@@ -12488,16 +12481,9 @@ var UI = /*#__PURE__*/function () {
     key: "setupAPP",
     value: function setupAPP() {
       cartList = Storage.getCart();
-      var TempTotal = 0;
-      var itemsTotal = 0;
-      cartList.map(function (item) {
-        TempTotal += item.price * item.amount;
-        itemsTotal += item.amount;
-      });
-      cartTotal.textContent = parseFloat(TempTotal.toFixed(2));
-      bagCartItems.textContent = itemsTotal;
+      UIfunctions.setCartValues(cartList);
       cartList.forEach(function (item) {
-        cart.insertAdjacentHTML("afterbegin", "\n<div class=\"nav__cart__item\">\n<img class=\"nav__cart__item__img\" src=\"".concat(item.image, "\" />\n<div class=\"nav__cart__item__info\">\n  <span class=\"nav__cart__item__title mar-tb-05\">").concat(item.title, "</span>\n  <span class=\"nav__cart__item__price\">$ ").concat(item.price, "</span>\n  <button class=\"nav__cart__item__remove-btn mar-tb-05\" data-id=\"").concat(item.id, "\">Remove</button>\n</div>\n<div class=\"nav__cart__item__quantity\">\n  <i class=\"fas fa-chevron-up\" data-id=\"").concat(item.id, "\"></i>\n  <span class=\"nav__cart__item__quantity-counter\">").concat(item.amount, "</span>\n  <i class=\"fas fa-chevron-down\" data-id=\"").concat(item.id, "\"></i>\n</div>\n</div>\n"));
+        UIfunctions.renderCartItems(item);
       });
     }
   }, {
@@ -12516,18 +12502,9 @@ var UI = /*#__PURE__*/function () {
           cartList = cartList.filter(function (item) {
             return item.id !== id;
           });
-          var TempTotal = 0;
-          var itemsTotal = 0;
-          cartList.map(function (item) {
-            TempTotal += item.price * item.amount;
-            itemsTotal += item.amount;
-          });
-          cartTotal.textContent = parseFloat(TempTotal.toFixed(2));
-          bagCartItems.textContent = itemsTotal;
+          UIfunctions.setCartValues(cartList);
           Storage.saveCart(cartList);
-          var button = buttons.find(function (btn) {
-            return btn.dataset.id === id;
-          });
+          var button = UIfunctions.getSingleButton(id);
           button.disabled = false;
           button.textContent = "Add to Cart";
           cart.removeChild(removeItem.parentElement.parentElement);
@@ -12539,14 +12516,7 @@ var UI = /*#__PURE__*/function () {
           });
           tempItem.amount += 1;
           Storage.saveCart(cartList);
-          var _TempTotal = 0;
-          var _itemsTotal = 0;
-          cartList.map(function (item) {
-            _TempTotal += item.price * item.amount;
-            _itemsTotal += item.amount;
-          });
-          cartTotal.textContent = parseFloat(_TempTotal.toFixed(2));
-          bagCartItems.textContent = _itemsTotal;
+          UIfunctions.setCartValues(cartList);
           addAmount.nextElementSibling.textContent = tempItem.amount;
         } else if (event.target.classList.contains("fa-chevron-down")) {
           var lowerAmount = event.target;
@@ -12560,32 +12530,16 @@ var UI = /*#__PURE__*/function () {
 
           if (_tempItem.amount > 0) {
             Storage.saveCart(cartList);
-            var _TempTotal2 = 0;
-            var _itemsTotal2 = 0;
-            cartList.map(function (item) {
-              _TempTotal2 += item.price * item.amount;
-              _itemsTotal2 += item.amount;
-            });
-            cartTotal.textContent = parseFloat(_TempTotal2.toFixed(2));
-            bagCartItems.textContent = _itemsTotal2;
+            UIfunctions.setCartValues(cartList);
             lowerAmount.previousElementSibling.textContent = _tempItem.amount;
           } else {
             cart.removeChild(lowerAmount.parentElement.parentElement);
             cartList = cartList.filter(function (item) {
               return item.id !== _id2;
             });
-            var _TempTotal3 = 0;
-            var _itemsTotal3 = 0;
-            cartList.map(function (item) {
-              _TempTotal3 += item.price * item.amount;
-              _itemsTotal3 += item.amount;
-            });
-            cartTotal.textContent = parseFloat(_TempTotal3.toFixed(2));
-            bagCartItems.textContent = _itemsTotal3;
+            UIfunctions.setCartValues(cartList);
 
-            var _button = buttons.find(function (btn) {
-              return btn.dataset.id === _id2;
-            });
+            var _button = UIfunctions.getSingleButton(_id2);
 
             _button.disabled = false;
             _button.textContent = "Add to Cart";
@@ -12617,6 +12571,28 @@ var UI = /*#__PURE__*/function () {
       cartList = cartList.filter(function (item) {
         return item.id !== id;
       });
+      UIfunctions.setCartValues(cartList);
+      Storage.saveCart(cartList);
+      var button = UIfunctions.getSingleButton(id);
+      button.disabled = false;
+      button.textContent = "Add to Cart";
+    }
+  }]);
+
+  return UI;
+}(); ////////////////////////////////////////////////////////
+// UI Functions
+////////////////////////////////////////////////////////
+
+
+var UIfunctions = /*#__PURE__*/function () {
+  function UIfunctions() {
+    _classCallCheck(this, UIfunctions);
+  }
+
+  _createClass(UIfunctions, null, [{
+    key: "setCartValues",
+    value: function setCartValues(cartList) {
       var TempTotal = 0;
       var itemsTotal = 0;
       cartList.map(function (item) {
@@ -12625,10 +12601,7 @@ var UI = /*#__PURE__*/function () {
       });
       cartTotal.textContent = parseFloat(TempTotal.toFixed(2));
       bagCartItems.textContent = itemsTotal;
-      Storage.saveCart(cartList);
-      var button = this.getSingleButton(id);
-      button.disabled = false;
-      button.textContent = "Add to Cart";
+      console.log("sdgsdhgs");
     }
   }, {
     key: "getSingleButton",
@@ -12637,9 +12610,19 @@ var UI = /*#__PURE__*/function () {
         return btn.dataset.id === id;
       });
     }
+  }, {
+    key: "renderCartItems",
+    value: function renderCartItems(cartItem) {
+      cart.insertAdjacentHTML("afterbegin", "\n<div class=\"nav__cart__item\">\n<img class=\"nav__cart__item__img\" src=\"".concat(cartItem.image, "\" />\n<div class=\"nav__cart__item__info\">\n<span class=\"nav__cart__item__title mar-tb-05\">").concat(cartItem.title, "</span>\n<span class=\"nav__cart__item__price\">$ ").concat(cartItem.price, "</span>\n<button class=\"nav__cart__item__remove-btn mar-tb-05\" data-id=\"").concat(cartItem.id, "\">Remove</button>\n</div>\n<div class=\"nav__cart__item__quantity\">\n<i class=\"fas fa-chevron-up\" data-id=\"").concat(cartItem.id, "\"></i>\n<span class=\"nav__cart__item__quantity-counter\">").concat(cartItem.amount, "</span>\n<i class=\"fas fa-chevron-down\" data-id=\"").concat(cartItem.id, "\"></i>\n</div>\n</div>\n"));
+    }
+  }, {
+    key: "renderStoreItems",
+    value: function renderStoreItems(product) {
+      store.insertAdjacentHTML("beforeend", "\n      <article class=\"store__item\">\n      <div class=\"store__item__img-container\">\n          <img class=\"store__item__img\" src=\"".concat(product.image, "\" />\n          <button class=\"store__item__btn\" data-id=\"").concat(product.id, "\">Add to Cart</button>\n      </div>\n      <div class=\"store__item__info\">\n      <span class=\"store__item__title mar-tb-05\">").concat(product.title, "</span>\n      <span class=\"store__item__price\">$ ").concat(product.price, "</span>\n      </div>\n  </article>\n      "));
+    }
   }]);
 
-  return UI;
+  return UIfunctions;
 }(); ////////////////////////////////////////////////////////
 // Loccal Storage
 ////////////////////////////////////////////////////////
@@ -12719,7 +12702,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52764" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54543" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
