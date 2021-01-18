@@ -12601,7 +12601,6 @@ var UIfunctions = /*#__PURE__*/function () {
       });
       cartTotal.textContent = parseFloat(TempTotal.toFixed(2));
       bagCartItems.textContent = itemsTotal;
-      console.log("sdgsdhgs");
     }
   }, {
     key: "getSingleButton",
@@ -12702,7 +12701,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55903" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55909" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

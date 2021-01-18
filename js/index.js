@@ -245,7 +245,6 @@ class UIfunctions {
     });
     cartTotal.textContent = parseFloat(TempTotal.toFixed(2));
     bagCartItems.textContent = itemsTotal;
-    console.log("sdgsdhgs");
   }
 
   static getSingleButton(id) {
