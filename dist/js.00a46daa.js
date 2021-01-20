@@ -12385,7 +12385,9 @@ var Products = /*#__PURE__*/function () {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return client.getEntries();
+                return client.getEntries({
+                  content_type: "title"
+                });
 
               case 3:
                 _contentful = _context.sent;
@@ -12701,7 +12703,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55909" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59578" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

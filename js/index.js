@@ -113,7 +113,7 @@ scrollLinks.forEach((link) => {
 class Products {
   async getProducts() {
     try {
-      const contentful = await client.getEntries();
+      const contentful = await client.getEntries({ content_type: "title" });
 
       let products = contentful.items;
       products = products.map((item) => {
